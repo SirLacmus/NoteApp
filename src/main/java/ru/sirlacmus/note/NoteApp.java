@@ -1,5 +1,7 @@
 package ru.sirlacmus.note;
 
+import ru.sirlacmus.note.util.JSONHandler;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -11,9 +13,15 @@ public class NoteApp {
     private final String delimiter = "------------------------------------";
 
     public NoteApp() {
-
         this.notes = new HashMap<>();
         this.scanner = new Scanner(System.in);
+
+        notes.putAll(JSONHandler.read());
+
+        if (notes.isEmpty()) {
+            notes.put(1, new Note(1, "2020/12/12", "First generated note!", Note.Categories.NO_CATEGORY, "NoteApp"));
+            JSONHandler.save(notes);
+        }
     }
 
     public void menu() {
@@ -24,10 +32,7 @@ public class NoteApp {
 
         author = scanner.next();
 
-
         while (true) {
-
-
             System.out.println(
                     "Please select the menu section:\n" +
                             "1. View all notes\n" +
@@ -112,6 +117,7 @@ public class NoteApp {
 
         Note newNote = new Note(notes.size() + 1, date, noteText, category, this.author);
         notes.put(newNote.getID(), newNote);
+        JSONHandler.save(notes);
     }
 
     private void editNote() {
@@ -164,6 +170,7 @@ public class NoteApp {
                         }
                     }
                     notes.get(editInput).setCategory(category);
+                    JSONHandler.save(notes);
                     System.out.println("Successfully edited category of a note with ID " + editInput);
                     break;
                 case "3":
@@ -185,6 +192,7 @@ public class NoteApp {
 
         if (notes.containsKey(id)) {
             notes.remove(id);
+            JSONHandler.save(notes);
             System.out.println("Note with ID " + id + " have been deleted.");
         } else {
             System.out.println("Please enter correct Note ID!");
