@@ -1,7 +1,5 @@
 package ru.sirlacmus.note;
 
-import java.util.Random;
-
 public class Note {
 
     private final int id;
@@ -10,15 +8,15 @@ public class Note {
     private String content;
     private Categories category;
 
-    public Note(String date, String content, Categories categories, String author) {
-        this.id = new Random(10000).nextInt();
+    public Note(int id, String date, String content, Categories categories, String author) {
+        this.id = id;
         this.date = date;
         this.content = content;
         this.category = categories;
         this.author = author;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 

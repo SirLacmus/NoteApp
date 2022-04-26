@@ -1,6 +1,5 @@
 package ru.sirlacmus.note;
 
-import java.util.Scanner;
 
 public class Main {
 
