@@ -2,11 +2,13 @@ package ru.sirlacmus.note.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import ru.sirlacmus.note.Note;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +24,8 @@ public class JSONHandler {
     }
 
     public static Map<Integer, Note> deserialize(String string) {
-        return gson.fromJson(string, Map.class);
+        Type type = new TypeToken<Map<Integer, Note>>(){}.getType();
+        return gson.fromJson(string, type);
     }
 
     public static Path getFile(String filePath) {

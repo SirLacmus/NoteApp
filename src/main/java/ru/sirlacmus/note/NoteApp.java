@@ -13,8 +13,8 @@ public class NoteApp {
     private final String delimiter = "------------------------------------";
 
     public NoteApp() {
-        this.notes = new HashMap<>();
         this.scanner = new Scanner(System.in);
+        this.notes = new HashMap<>();
 
         notes.putAll(JSONHandler.read());
 
@@ -22,6 +22,8 @@ public class NoteApp {
             notes.put(1, new Note(1, "2020/12/12", "First generated note!", Note.Categories.NO_CATEGORY, "NoteApp"));
             JSONHandler.save(notes);
         }
+
+
     }
 
     public void menu() {
@@ -118,6 +120,7 @@ public class NoteApp {
         Note newNote = new Note(notes.size() + 1, date, noteText, category, this.author);
         notes.put(newNote.getID(), newNote);
         JSONHandler.save(notes);
+        System.out.println("Successfully created new note with ID " + newNote.getID());
     }
 
     private void editNote() {
@@ -198,6 +201,4 @@ public class NoteApp {
             System.out.println("Please enter correct Note ID!");
         }
     }
-
-
 }
