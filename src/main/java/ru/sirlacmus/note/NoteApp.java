@@ -29,7 +29,7 @@ public class NoteApp {
 
 
             System.out.println(
-                    "Please select the menu item below:\n" +
+                    "Please select the menu section:\n" +
                             "1. View all notes\n" +
                             "2. Create new note\n" +
                             "3. Edit note\n" +
@@ -69,7 +69,7 @@ public class NoteApp {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Please enter correct menu value");
+                    System.out.println("Please choose correct menu section");
                     break;
             }
 
